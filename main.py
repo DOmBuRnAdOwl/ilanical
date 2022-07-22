@@ -8,12 +8,11 @@ lancsfeed="http://timetabling.lancaster.ac.uk/iCalendar/Personal.ics"
 
 def main():
     cal = Calendar()
-    
-    ecal = cal.from_ical(requests.get(lancsfeed+"?ID="+id).text)    
+    ecal = cal.from_ical(requests.get(lancsfeed+"?ID="+id).text)
     for component in ecal.walk():
         if component.name == "VEVENT":
+            print(component.get("summary"))
             print(component.get("description"))
-            print(component.get("organizer"))
             print(component.get("location"))
             print(component.decoded("dtstart"))
             print(component.decoded("dtend"))
